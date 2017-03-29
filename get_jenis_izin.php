@@ -3,10 +3,7 @@
 
 	require_once ('config/connect.php');
 
-	$idKecamatan = $_GET['id'];
-
-	$query = mysqli_query($connect, "SELECT kel.n_kelurahan, kel.id FROM trkelurahan kel, trkecamatan_trkelurahan kk 
-							WHERE kel.id = kk.trkelurahan_id AND kk.trkecamatan_id=$idKecamatan ");
+	$query = mysqli_query($connect, "SELECT per.n_perizinan, per.id FROM trperizinan per");
 
 	$result = array();
 
@@ -24,8 +21,8 @@
 		while ($row=mysqli_fetch_object($query)) {
 			
 			$temp = array(
-					'id_kelurahan' => $row->id,
-					'nama_kelurahan' => $row->n_kelurahan
+					'id_perizinan' => $row->id,
+					'nama_perizinan' => $row->n_perizinan,					
 				);
 
 			$result['result'][$idx] = $temp;

@@ -13,10 +13,13 @@
 	if(!$query){
 
 		$result['error'] = true;
+		$result['success'] = false;
 		$result['message'] = 'An error occured :'.mysqli_error($connect);
 
 	}else{
-
+		$result['error'] = false;
+		$result['success'] = true;
+		$result['result'] = array();
 		$idx = 0;
 		while ($row=mysqli_fetch_object($query)) {
 			
@@ -25,7 +28,7 @@
 					'nama_kabupaten' => $row->n_kabupaten
 				);
 
-			$result[$idx] = $temp;
+			$result['result'][$idx] = $temp;
 
 			$idx++;
 
