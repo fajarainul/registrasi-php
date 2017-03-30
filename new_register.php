@@ -48,21 +48,36 @@
 
 
 	//check file
-	$data = base64_decode($data, true);
-
-	$file = 'upload/'.$filename;
+	/*$data = urldecode($file);
+	$data = base64_decode($data, true);*/
 	//jika upload gagal, maka failed
-	if(!file_put_contents($file, $data)){
+	/*if(!file_put_contents($filename, $data)){
 
 		$result['error'] = true;
 		$result['success'] = false;
 		$result['message'] = 'An error occured when saving file';
 		die();
 
+	}*/
+
+	$data = urldecode($file);
+	$binary = base64_decode($data, true);
+
+	$filename = 'upload/'.$filename;
+	
+	$file = fopen($filename, 'wb');
+    
+    fwrite($file, $binary);
+
+    fclose($file); 
+	
+	if(!file_exists($filename)){
+		$result['error'] = true;
+		$result['success'] = false;
+		$result['message'] = 'An error occured when saving file';
+		echo json_encode($result);
+		die();
 	}
-
-
-
 
 	$no_urut = get_latest_urut($connect2);
 	$no_urut = $no_urut->urut;
@@ -301,7 +316,7 @@
     		VALUES
     		('".$id_pemohon."', '".$jenis_identitas."', '".$nama_pemohon."', '".$telp_pemohon."', '".$alamat_pemohon."', '".$id_provinsi."', '".$id_kabupaten."', '".$id_kecamatan."', '".$id_kelurahan."',
     			'".$npwp."', '".$no_register."', '".$nama_perusahaan."', '".$alamat_perusahaan."', '".$telp_perusahaan."', '".$id_provinsi_perusahaan."', '".$id_kabupaten_perusahaan."',
-    			'".$id_kecamatan_perusahaan."', '".$id_kelurahan_perusahaan."', '".$file."', '".$jenis_izin_id."', '".$no_uniq."', '".$nama_perizinan_text."', '".$nomor_pendaftaran."', '".$nama_provinsi."',
+    			'".$id_kecamatan_perusahaan."', '".$id_kelurahan_perusahaan."', '".$filename."', '".$jenis_izin_id."', '".$no_uniq."', '".$nama_perizinan_text."', '".$nomor_pendaftaran."', '".$nama_provinsi."',
     			'".$nama_kabupaten."', '".$nama_kecamatan."', '".$nama_kelurahan."', '".$nama_provinsi_perusahaan."', '".$nama_kabupaten_perusahaan."',
     			'".$nama_kecamatan_perusahaan."', '".$nama_kelurahan_perusahaan."', '".$unit_kerja_id."', '".$unit_kerja_text."')
 
