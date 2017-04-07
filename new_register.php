@@ -334,6 +334,10 @@
     $result['error'] = false;
 	$result['success'] = true;
 	$result['message'] = 'Success';
+	$result['no_pendaftaran'] = $nomor_pendaftaran;
+	$result['nama_pemohon'] = $nama_pemohon;
+	$result['nama_perusahaan'] = $nama_perusahaan;
+
 
 	echo json_encode($result);
 
