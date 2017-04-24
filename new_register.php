@@ -306,7 +306,7 @@
 
     
     //INSERT PERIZINAN ONLINE
-    $query_insert_perizinan = mysqli_query($connect2, "INSERT INTO default_perizinan_online 
+    $query_insert_perizinan_default = mysqli_query($connect2, "INSERT INTO default_perizinan_online 
 
     		(id_pemohon, jenis_identitas, nama_pemohon, telp_pemohon, alamat_pemohon, provinsi_pemohon, kabupaten_pemohon, kecamatan_pemohon, kelurahan_pemohon,
     			npwp_perusahaan, no_register_perusahaan, nama_perusahaan, alamat_perusahaan, telepon_perusahaan, provinsi_perusahaan, kabupaten_perusahaan,
@@ -322,7 +322,7 @@
 
     	");
     
-    if(!$query_insert_perizinan){
+    if(!$query_insert_perizinan_default){
     	$result['error'] = true;
 		$result['success'] = false;
 		$result['message'] = 'An error occured query insert permohonan:'.mysqli_error($connect2);
